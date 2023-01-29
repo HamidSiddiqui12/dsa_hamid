@@ -59,14 +59,35 @@ struct node* deletion_between_two_nodes(struct node* headptr, int index) {
     return headptr;
 }
 
+//Deletion at given node
+struct node* deletion_at_given_node(struct node* headptr, int data){
+    struct node* ptr1 = headptr;
+    struct node* ptr2 = headptr->next;
+
+    while (ptr2->data != data && ptr2->next != NULL)
+    {
+        ptr1 = ptr1->next;
+        ptr2 = ptr2->next;
+    }
+
+    if (ptr2->data == data)
+    {
+        ptr1->next = ptr2->next;
+        free(ptr2);
+    }
+    
+    return headptr;
+}
+
 int main(){
-    struct node* head, *second, *third, *fourth, *fifth;
+    struct node* head, *second, *third, *fourth, *fifth, *sixth;
 
     head = (struct node*)malloc(sizeof(struct node));
     second = (struct node*)malloc(sizeof(struct node));
     third = (struct node*)malloc(sizeof(struct node));
     fourth = (struct node*)malloc(sizeof(struct node));
     fifth = (struct node*)malloc(sizeof(struct node));
+    sixth = (struct node*)malloc(sizeof(struct node));
 
     //Allocating the value to the data and address to the nexr pointer
     head->data = 1;
@@ -82,7 +103,10 @@ int main(){
     fourth->next = fifth;
 
     fifth->data = 11111;
-    fifth->next = NULL;
+    fifth->next = sixth;
+
+    sixth->data = 111111;
+    sixth->next = NULL;
 
     //Traversing through the linked list
     display(head);
@@ -107,7 +131,12 @@ int main(){
 
     // Deletion between two nodes
     printf("\nDeletion part 3: \n");
-    head = deletion_between_two_nodes(head, 1);
+    head = deletion_between_two_nodes(head, 1); //using index
+    display(head);
+
+    // Deletion at given node
+    printf("\nDeletion part 4: \n");
+    head = deletion_at_given_node(head, 1111); //using data value
     display(head);
 
     return 0;
