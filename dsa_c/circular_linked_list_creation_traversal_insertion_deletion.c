@@ -19,6 +19,7 @@ void display(struct node* headptr) {
     printf("\n");
 }
 
+//Insertion in circular linked list
 struct node* insert_At_first(struct node* headptr, int data){
     struct node* ptr = (struct node*)malloc(sizeof(struct node));
     struct node* p = headptr->next;
@@ -90,6 +91,76 @@ struct node* insert_at_given(struct node* headptr, int data, int valueptr){
     return headptr;
 }
 
+//Insertion in circular linked list
+struct node* deletion_at_first(struct node* headptr) {
+    struct node* p = headptr;
+    struct node* q = headptr->next;
+
+    while (q->next!= headptr)
+    {
+        q = q->next;
+    }
+
+    q->next = p->next;
+    headptr = p->next;
+    free(p);
+
+    return headptr;
+}
+
+struct node* deletion_at_end(struct node* headptr) {
+    struct node* p = headptr;
+    struct node* q = headptr->next;
+
+    while (q->next != headptr)
+    {
+        q = q->next;
+        p = p->next;
+    }
+    
+    p->next = headptr;
+    free(q);
+
+    return headptr;
+}
+
+struct node* deletion_in_between(struct node* headptr, int index) {
+    struct node* p = headptr;
+    struct node* q = headptr->next;
+    int i = 0;
+
+    while (i != index-1)
+    {
+        p = p->next;
+        q = q->next;
+        i++;
+    }
+    
+    p->next = q->next;
+    free(q);
+
+    return headptr;
+}
+
+struct node* deletion_at_given(struct node* headptr, int value) {
+    struct node* p = headptr;
+    struct node* q = headptr->next;
+
+    while (q->data != value && q->next != headptr)
+    {
+        p = p->next;
+        q = q->next;
+    }
+
+    if (q->data == value)
+    {
+        p->next = q->next;
+        free(q);
+    }
+
+    return headptr;
+}
+
 int main(){
 
     struct node* head;
@@ -116,6 +187,7 @@ int main(){
 
     display(head);
 
+    //Insertion in circular linked list
     head = insert_At_first(head, 99);
     display(head);
 
@@ -128,4 +200,19 @@ int main(){
     head = insert_at_given(head, 66, 12); //It will remove the first instance of the "12" in the linked list, and here "12" is a value.
     display(head);
 
+
+    //Deletion in circular linked list
+    head = deletion_at_first(head);
+    display(head);
+
+    head = deletion_at_end(head);
+    display(head);
+
+    head = deletion_in_between(head, 2);
+    display(head);
+
+    head = deletion_at_given(head, 12);
+    display(head);
+
+    return 0;
 }
