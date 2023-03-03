@@ -18,7 +18,7 @@ int basic_insertion(int arr[], int size, int capacity, int element, int index){
     }
 
     // size-1 = last index number
-    for (int i = (size-1); i <= index; i--)
+    for (int i = (size-1); i >= index; i--)
     {
         // arr[i+1] is the empty space in the array where arr[i] value is going.
         arr[i+1] = arr[i];
@@ -42,7 +42,7 @@ int basic_deletion(int arr[], int size, int index){
 }
 
 void linearsearch(int arr[], int size, int element) {
-    for (int i = 0; i < (size-1); i++)
+    for (int i = 0; i < (size); i++)
     {
         if (arr[i] == element)
         {

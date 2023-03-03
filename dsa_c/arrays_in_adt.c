@@ -53,5 +53,13 @@ int main(){
     //Show the value in the array
     show_val(&check_struct);
 
+    create_array(&check_struct, 8, 2);
+
+    //setting the value to the array
+    getval(&check_struct);
+
+    //Show the value in the array
+    show_val(&check_struct);
+
     return 0;
 }
